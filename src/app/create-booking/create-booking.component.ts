@@ -27,29 +27,31 @@ export class CreateBookingComponent implements OnInit {
   ngOnInit(): void {
     if (this.router.url != '/createBooking') {
       var id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-      var bookingById = this.BookingService.getBookingById(id);
+      this.BookingService.getBookingById(id).subscribe((result) => {
+        this.booking = result;
+      });
       /*referrring to service
       var bookingById = Bookings.find((x) => x.id == id)!;*/
-      this.booking = bookingById;
     }
   }
   save(): void {
-    var bookingById = this.BookingService.getBookingById(this.booking.id)
+    this.BookingService.getBookingById(this.booking.id).subscribe(
+      (result) => {
+        console.log(result);
+      }
+    );
     /*same
     var bookingById = Bookings.find((x) => x.id == this.booking.id);*/
-    if (bookingById == null || bookingById == undefined) {
-      this.BookingService.addBooking(this.booking);
-      /*.push is a upcoming service method too
+    //if (bookingById == null || bookingById == undefined) {
+    this.BookingService.addBooking(this.booking).subscribe();
+    /*.push is a upcoming service method too
       Bookings.push(this.booking);*/
-    } else {
-      this.BookingService.updateBooking(this.booking);
-      /* update method incoming
-      bookingById = this.booking;*/
-    }
-
-    
     this.router.navigate(['bookings']);
   }
+  // POST does update anywayelse { this.BookingService.updateBooking(this.booking);
+  /* update method incoming
+      bookingById = this.booking;*/
+
   dateChanged(event: Event, isStart: boolean) {
     var value = (event.target as HTMLInputElement).value;
     if (isStart) {

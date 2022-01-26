@@ -31,12 +31,14 @@ export class BookingService {
     return bookingById;*/
     return response;
   }
-  addBooking(booking: Booking) : void{
-    Bookings.push(booking);
+  addBooking(booking: Booking) : Observable<Booking>{
+    var response = this.httpClient.post<Booking>(this.bookingUrl, booking)
+    return response;
+    //Bookings.push(booking);
   }
-  updateBooking(booking: Booking) : void{
-    var currentBooking = this.getBookingById(booking.id);
-    currentBooking = booking;
+  // POST does ist anyway => updateBooking(booking: Booking) : void{
+    //var currentBooking = this.getBookingById(booking.id);
+    //currentBooking = booking;
 
   }
-}
+
