@@ -14,12 +14,14 @@ export class BookingsComponent implements OnInit {
   bookings: Booking[] = [];
 
   ngOnInit(): void {
-   this.bookingService.getBookings().subscribe((result)=>{
-     this.bookings = result;
-   });
+    this.bookingService.getBookings().subscribe((result) => {
+      this.bookings = result;
+    });
   }
   deleteBooking(booking: Booking): void {
-    this.bookingService.deleteBooking(booking);
+    this.bookingService.deleteBooking(booking).subscribe();
+    //frontend
+    this.bookings = this.bookings.filter(b => b != booking);
 
     /*method is coded in bookingService, here's just referring/
     var index = Bookings.indexOf(booking);
