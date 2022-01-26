@@ -2,7 +2,18 @@
 
 
 
-# HotelApp
+# HotelBooking App :hotel:
+This project was created as a practice app for the [Udemy angular crash course](https://www.udemy.com/course/angular-komplettkurs/),
+using
+- angular CLI
+- Typescript
+- Bootstrap
+- in-memory-web-api npm-package.
+
+
+
+
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.4.
 
