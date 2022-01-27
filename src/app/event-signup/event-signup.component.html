@@ -1,23 +1,62 @@
-
 <form #formSignup="ngForm">
-  <div class="card bg-secondary text-white">
+  <div [class.bg-danger]="formSignup.invalid" [class.bg-secondary]="formSignup.valid" class="card bg-secondary text-white">
     <div class="card-header">
       <h5>GET YOUR EVENTS</h5>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col">
-                <input #inputMail="ngModel" required  email min-length=8 name="signupMail" [(ngModel)]="signupMail" class="form-control" placeholder="put your mail"/>
-            </div>
-            <div *ngIf="inputMail.invalid && (inputMail.touched || inputMail.dirty)" class="row mt-2">
-                <div class="col">
-                    <div class="alert alert-warning">oops...something went wrong</div>
-                </div>
-            </div>
+      <div class="row mb-2">
+        <div class="col">
+          <input
+            #inputMail="ngModel"
+            required
+            email
+            min-length="8"
+            name="signupMail"
+            [(ngModel)]="signupMail"
+            class="form-control"
+            placeholder="your mail"
+          />
         </div>
+        <div
+          *ngIf="inputMail.invalid && (inputMail.touched || inputMail.dirty)"
+          class="row mb-2"
+        >
+          <div class="col">
+            <div
+              *ngIf="inputMail.errors?.['required']"
+              class="alert alert-warning"
+            >
+              oops...need for email adress
+            </div>
+          </div>
+          <div class="col">
+            <div
+              *ngIf="inputMail.errors?.['minlength']"
+              class="alert alert-warning"
+            >
+              oops...did u forget a letter?
+            </div>
+          </div>
+          <div class="col">
+            <div
+              *ngIf="inputMail.errors?.['email'] && !inputMail.hasError('minlength')"
+              class="alert alert-warning"
+            >
+              oops...r u sure this is an email adress?
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="card-footer">
-      <button [disabled]="formSignup.invalid" required (click)="onSubmit()" class="btn btn-warning text-white">sign UP</button>
+      <button
+        [disabled]="formSignup.invalid"
+        required
+        (click)="onSubmit()"
+        class="btn btn-warning text-white"
+      >
+        sign UP
+      </button>
     </div>
   </div>
 </form>
