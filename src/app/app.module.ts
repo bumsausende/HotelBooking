@@ -9,9 +9,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule, InMemoryBackendConfig } from 'angular-in-memory-web-api';
 import { InMemoryDataServiceService } from './in-memory-data-service.service';
 import { EventSignupComponent } from './event-signup/event-signup.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [AppComponent, BookingsComponent, CreateBookingComponent, EventSignupComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, HttpClientInMemoryWebApiModule.forRoot(InMemoryDataServiceService, /*{dataEncapsulation:true}*/)],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, HttpClientInMemoryWebApiModule.forRoot(InMemoryDataServiceService, /*{dataEncapsulation:true}*/), ReactiveFormsModule], 
   providers: [],
   bootstrap: [AppComponent],
 })

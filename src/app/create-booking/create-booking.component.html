@@ -1,44 +1,75 @@
-
 <div class="card">
-    <div class="card-header bg-secondary text-white">
-<h4>NEW BOOKING</h4>
-    </div>
+  <div class="card-header bg-secondary text-white">
+    <h4>NEW BOOKING</h4>
+  </div>
+  <form [formGroup]="bookingForm" (ngSubmit)="save()">
     <div class="card-body">
-<form>
-  <!--id/roomNumber-->
-  <div class="row m-3">
-    <div class="col">
-        <label class="form-label">ID</label>
-      <input type="number" [(ngModel)]="booking.id" name="ID" class="form-control"/>
-    </div>
-    <div class="col">
-        <label class="form-label">ROOM</label>
-      <input type="number" [(ngModel)]="booking.roomNumber" name="ROOM" class="form-control" />
-    </div>
-  </div>
+      <!--id/roomNumber-->
+      <div class="row m-3">
+        <div class="col">
+          <label class="form-label">ID</label>
+          <input type="number" formControlName="id" class="form-control" />
+        </div>
+        <div class="col">
+          <label class="form-label">ROOM</label>
+          <input
+            type="number"
+            formControlName="roomNumber"
+            class="form-control"
+          />
+        </div>
+      </div>
 
-  <!--name-->
-  <div class="row m-3">
-    <div class="col-4">
-        <label class="form-label">NAME</label>
-      <input type="text" [(ngModel)]="booking.name" name="NAME"class="form-control"/>
-    </div>
-  </div>
+      <!--name-->
+      <div class="row m-3">
+        <div class="col-4">
+          <label class="form-label">NAME</label>
+          <input type="text" formControlName="name" class="form-control" />
+          <div class="row mb-2">
+            <div class="col">
+              <div
+                *ngIf="bookingForm.get('name')?.hasError('minlength')"
+                class="alert alert-warning text-danger"
+              >
+                thats quite a short name
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  <!--startDate/ endDate-->
-  <div class="row m-3">
-    <div class="col">         
-        <label class="form-label">START</label>
-        <input type="date" [value]="booking.startDate | date:'yyyy-MM-dd'" (input)="dateChanged($event, true)" class="form-control"/>
+      <!--startDate/ endDate-->
+      <div class="row m-3">
+        <div class="col">
+          <label class="form-label">START</label>
+          <input
+            type="date"
+            [value]="booking.startDate | date: 'yyyy-MM-dd'"
+            (input)="dateChanged($event, true)"
+            class="form-control"
+            formControlName="startDate"
+          />
+        </div>
+        <div class="col">
+          <label class="form-label">END</label>
+          <input
+            type="date"
+            [value]="booking.endDate | date: 'yyyy-MM-dd'"
+            (input)="dateChanged($event, false)"
+            class="form-control"
+            formControlName="endDate"
+          />
+        </div>
+      </div>
     </div>
-    <div class="col">
-        <label class="form-label">END</label>
-        <input type="date" [value]="booking.endDate | date:'yyyy-MM-dd'" (input)="dateChanged($event, false)" class="form-control"/>
+    <div class="card-footer bg-secondary text-white text-center">
+      <button
+        [disabled]="bookingForm.invalid"
+        type="submit"
+        class="btn btn-light"
+      >
+        GO
+      </button>
     </div>
-  </div>
-</form>
-</div>
-<div class="card-footer bg-secondary text-white text-center">
-        <button (click)="save()" class="btn btn-light">GO</button>
-</div>
+  </form>
 </div>
